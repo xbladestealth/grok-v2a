@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Description</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="theme-toggle">
+        <label for="theme-switch">Dark Mode</label>
+        <input type="checkbox" id="theme-switch">
+    </div>
+    <div class="logo-container">
+        <div class="x-logo">
+            <a href="https://x.com/xbladestealth" target="_blank" rel="noopener noreferrer">
+                <img src="/static/logos/x_logo_light.png" alt="X Logo Light Mode" class="logo x-logo-light">
+                <img src="/static/logos/x_logo_dark.png" alt="X Logo Dark Mode" class="logo x-logo-dark">
+            </a>
+        </div>
+        <div class="title-logo">
+            <img src="/static/logos/dotproduct_logo_light.png" alt="Title Logo Light Mode" class="logo title-logo-light">
+            <img src="/static/logos/dotproduct_logo_dark.png" alt="Title Logo Dark Mode" class="logo title-logo-dark">
+        </div>
+    </div>
+    <form id="upload-form" enctype="multipart/form-data">
+        <label for="image">Upload an image (JPEG or PNG, max 5MB)</label>
+        <div class="file-input-wrapper">
+            <input type="file" id="image" name="image" accept="image/jpeg,image/png" required>
+            <button type="button" class="custom-file-button" onclick="document.getElementById('image').click()">Choose Image</button>
+        </div>
+        <label for="prompt">Enter your prompt</label>
+        <textarea id="prompt" name="prompt" rows="4" required>What is this image about? Please describe it in detail.</textarea>
+        <input type="submit" value="Submit">
+    </form>
+    <div id="response-container"></div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
