@@ -1,5 +1,39 @@
 # Release Notes
 
+## v0.0.2
+**Release Date:** June 1, 2025
+
+### Overview
+This release enhances `grok-v2a` with client-side webcam support, an image preview feature, and fixes for layout stability and user interface clarity. It builds on the initial release by improving user interaction and streamlining the image description process, maintaining the X-inspired GUI and robust backend.
+
+### Features
+- **Webcam Feed Processing** ([93bb84d](https://github.com/xbladestealth/grok-v2a/commit/93bb84d13237933371da7ad8f365c7fa6a06af07))  
+  Added support for capturing images directly from the client's webcam:
+  - Implemented a "Webcam Mode" toggle to access the camera feed.
+  - Enabled image capture with a "Capture" button, storing snapshots for submission.
+  - Added functionality to restart the feed and take new images.
+  - Blocked form submission during active webcam mode (`buttonState === "capture"`) with an error alert for better UX.
+
+- **Image Preview Feature** ([b74a716](https://github.com/xbladestealth/grok-v2a/commit/b74a71695acbb5a87baba9742856db9042c48c68))  
+  Introduced a preview for uploaded or captured images, replacing redundant response visualization:
+  - Added `<img class="preview-image">` within `.image-preview` to display selected files, captured snapshots, or the default image (`/static/images/deca_bg.jpg`).
+  - Removed redundant image display in the response, focusing on markdown-rendered descriptions.
+  - Included client-side validation and error handling for image loading failures.
+
+### Fixes
+- **Prevent Layout Shift with Scrollbar** ([72e1455](https://github.com/xbladestealth/grok-v2a/commit/72e14554e1d9af523e30f75729246551250ce480))  
+  Fixed content shifting left during form submission:
+  - Added `html { overflow-y: scroll; }` to always display the vertical scrollbar, ensuring consistent layout width.
+  - Stabilized `body` and `#response-container` with fixed widths and minimum heights to prevent reflows.
+
+- **Improved Webcam Button Label** ([139dc1f](https://github.com/xbladestealth/grok-v2a/commit/139dc1f8e04313d3636cb851c49d12cfc41c3b0d))  
+  Replaced the "Recapture" button label with "Restart" for clarity:
+  - Updated the button text to better reflect the action of restarting the webcam feed for a new capture.
+  - Enhanced user experience by avoiding confusion with immediate re-capture implications.
+
+### Known Issues
+- An issue has been reported regarding the application’s functionality. See [Issue #3](https://github.com/xbladestealth/grok-v2a/issues/3) for details and updates.
+
 ## v0.0.1
 **Release Date:** May 25, 2025
 
