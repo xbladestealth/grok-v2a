@@ -21,6 +21,9 @@
 }
 
 /* Global Styles */
+html {
+    overflow-y: scroll; /* Always show scrollbar to prevent layout shift */
+}
 body {
     font-family: 'Inter', sans-serif;
     max-width: 600px;
@@ -29,6 +32,8 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Theme Toggle */
@@ -250,6 +255,7 @@ input[type="submit"]:active {
     border-radius: 16px;
     box-shadow: 0 4px 12px var(--shadow-color);
     animation: fadeIn 0.5s ease-in;
+    min-height: 50px;
 }
 #response-text {
     line-height: 1.6;
