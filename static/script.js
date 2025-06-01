@@ -23,7 +23,7 @@ themeSwitch.addEventListener('change', () => {
 // Webcam mode setup
 let stream = null;
 let capturedImage = null;
-let buttonState = 'choose'; // choose, capture, recapture
+let buttonState = 'choose'; // choose, capture, restart
 const webcamSwitch = document.getElementById('webcam-switch');
 const video = document.querySelector('.preview-video');
 const previewImage = document.querySelector('.preview-image');
@@ -128,11 +128,11 @@ function captureWebcamImage() {
             }
             video.srcObject = null;
             videoReady = false;
-            fileButton.textContent = 'Recapture';
+            fileButton.textContent = 'Restart';
             fileButton.classList.add('webcam-active');
             fileInput.disabled = false;
-            buttonState = 'recapture';
-            fileButton.setAttribute('aria-label', 'Recapture Webcam Image');
+            buttonState = 'restart';
+            fileButton.setAttribute('aria-label', 'Restart Webcam Feed');
             console.log('Image captured successfully');
             // Verify image load
             previewImage.onerror = () => {
@@ -177,7 +177,7 @@ fileButton.addEventListener('click', (event) => {
     console.log('Button clicked, state:', buttonState);
     if (buttonState === 'capture') {
         captureWebcamImage();
-    } else if (buttonState === 'recapture') {
+    } else if (buttonState === 'restart') {
         restartWebcamFeed();
     } else {
         fileInput.click();
