@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Description</title>
+    <title>Image Descriptor & Python Script Generator</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css?v=6">
+    <link rel="stylesheet" href="/static/style.css?v=10">
 </head>
 <body>
     <div class="theme-toggle">
@@ -26,21 +28,36 @@
             <img src="/static/images/dotproduct_logo_dark.png" alt="Title Logo Dark Mode" class="logo title-logo-dark">
         </div>
     </div>
-    <div class="image-preview">
-        <img class="preview-image" src="/static/images/deca_bg.jpg" alt="Image Preview">
-        <video class="preview-video" autoplay playsinline hidden></video>
-    </div>
-    <form id="upload-form" enctype="multipart/form-data">
-        <label for="image">Upload an image (JPEG or PNG, max 5MB)</label>
-        <div class="file-input-wrapper">
-            <input type="file" id="image" name="image" accept="image/jpeg,image/jpg,image/png" class="file-input">
-            <button type="button" class="custom-file-button">Choose Image</button>
+    <div class="panels-container">
+        <!-- Image Descriptor Panel -->
+        <div class="panel panel-left">
+            <div class="image-preview">
+                <img class="preview-image" src="/static/images/deca_bg.jpg" alt="Image Preview">
+                <video class="preview-video" autoplay playsinline hidden></video>
+            </div>
+            <form id="upload-form" action="" method="post" enctype="multipart/form-data">
+                <label for="image">Upload an image (JPEG or PNG, max 5MB)</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="image" name="image" accept="image/jpeg,image/jpg,image/png" class="file-input">
+                    <button type="button" class="custom-file-button">Choose Image</button>
+                </div>
+                <label for="prompt">Enter your prompt</label>
+                <textarea id="prompt" name="prompt" rows="4" required>What is this image about? Please describe it in detail.</textarea>
+                <input type="submit" value="Submit">
+            </form>
+            <div id="response-container" aria-live="polite"></div>
         </div>
-        <label for="prompt">Enter your prompt</label>
-        <textarea id="prompt" name="prompt" rows="4" required>What is this image about? Please describe it in detail.</textarea>
-        <input type="submit" value="Submit">
-    </form>
-    <div id="response-container" aria-live="polite"></div>
-    <script src="/static/script.js?v=6"></script>
+        <!-- Python Script Generator Panel -->
+        <div class="panel panel-right">
+            <form id="script-form" action="" method="post">
+                <label for="script-prompt">Enter your prompt for Python script</label>
+                <textarea id="script-prompt" name="script-prompt" rows="4" required>Write a Python script to...</textarea>
+                <input type="submit" value="Generate Script">
+            </form>
+            <div id="script-response-container" aria-live="polite"></div>
+        </div>
+    </div>
+    <script src="/static/script.js?v=8"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>

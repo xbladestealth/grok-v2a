@@ -26,7 +26,7 @@ html {
 }
 body {
     font-family: 'Inter', sans-serif;
-    max-width: 600px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 20px;
     background-color: var(--bg-color);
@@ -34,6 +34,19 @@ body {
     transition: background-color 0.3s, color 0.3s;
     width: 100%;
     box-sizing: border-box;
+}
+
+/* Panels Container */
+.panels-container {
+    display: flex;
+    gap: 20px;
+    margin: 0 auto;
+    justify-content: center;
+}
+.panel {
+    flex: 1;
+    min-width: 400px;
+    max-width: 700px;
 }
 
 /* Theme Toggle */
@@ -130,7 +143,7 @@ body {
 
 /* Image Preview */
 .image-preview {
-    max-width: 600px;
+    max-width: 100%;
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 12px var(--shadow-color);
@@ -248,7 +261,8 @@ input[type="submit"]:active {
 }
 
 /* Response Container */
-#response-container {
+#response-container,
+#script-response-container {
     margin-top: 1.5rem;
     padding: 1.5rem;
     background: var(--bg-color);
@@ -264,6 +278,32 @@ input[type="submit"]:active {
 .loading {
     color: var(--loading-color);
     font-style: italic;
+}
+
+/* Code Block Styles */
+pre {
+    background: var(--input-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    margin: 0;
+}
+code {
+    font-family: 'Courier New', Courier, monospace;
+    background: none;
+    color: inherit;
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+    .panels-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .panel {
+        max-width: 100%;
+    }
 }
 
 /* Animations */
