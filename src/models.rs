@@ -1,6 +1,11 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
+pub struct GenerateScriptRequest {
+    pub prompt: String,
+}
+
+#[derive(Serialize, Deserialize)]
 pub struct Message {
     pub role: String,
     pub content: Vec<Content>,

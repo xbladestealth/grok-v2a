@@ -16,6 +16,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app = Router::new()
         .route("/", get(handlers::serve_form))
         .route("/describe_image", post(handlers::describe_image))
+        .route("/generate_python_script", post(handlers::generate_python_script))
         .nest_service("/static", ServeDir::new("static"));
 
     let addr = std::net::SocketAddr::from(([127, 0, 0, 1], 3000));
