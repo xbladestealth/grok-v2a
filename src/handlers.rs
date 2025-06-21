@@ -28,6 +28,33 @@ pub async fn generate_python_script(Json(payload): JsonExtract<GenerateScriptReq
         ));
     }
 
+    // Read config/pybricks_api.json
+    let pybricks_api = tokio::fs::read_to_string("config/pybricks_api.json").await.map_err(|e| {
+        error!("Failed to read pybricks_api.json: {}", e);
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({ "error": format!("Failed to read pybricks_api.json: {}", e) })),
+        )
+    })?;
+
+    // Read config/rover_specs.json
+    let rover_specs = tokio::fs::read_to_string("config/rover_specs.json").await.map_err(|e| {
+        error!("Failed to read rover_specs.json: {}", e);
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({ "error": format!("Failed to read rover_specs.json: {}", e) })),
+        )
+    })?;
+
+    // Read config/template.py
+    let template_py = tokio::fs::read_to_string("config/template.py").await.map_err(|e| {
+        error!("Failed to read template.py: {}", e);
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(json!({ "error": format!("Failed to read template.py: {}", e) })),
+        )
+    })?;
+
     let api_key = env::var("XAI_API_KEY").map_err(|e| {
         error!("XAI_API_KEY not set: {}", e);
         (
@@ -47,6 +74,15 @@ pub async fn generate_python_script(Json(payload): JsonExtract<GenerateScriptReq
             )
         })?;
 
+    // Compose the prompt with config contents
+    let full_prompt = format!(
+        "Generate a Python script for the following task, just return the script: {}\n\n\
+        pybricks_api.json:\n{}\n\n\
+        rover_specs.json:\n{}\n\n\
+        template.py:\n{}\n",
+        user_prompt, pybricks_api, rover_specs, template_py
+    );
+
     let request_body = json!({
         "model": "grok-3",
         "messages": [
@@ -55,7 +91,7 @@ pub async fn generate_python_script(Json(payload): JsonExtract<GenerateScriptReq
                 "content": [
                     {
                         "type": "text",
-                        "text": format!("Generate a Python script for the following task: {}", user_prompt)
+                        "text": full_prompt
                     }
                 ]
             }

@@ -1,0 +1,10 @@
+{
+  "MoveHub": {
+    "methods": {
+      "motor": {
+        "run": "Run motor at specified speed",
+        "stop": "Stop motor"
+      }
+    }
+  }
+}
