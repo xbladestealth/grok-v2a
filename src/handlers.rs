@@ -84,7 +84,7 @@ pub async fn generate_python_script(Json(payload): JsonExtract<GenerateScriptReq
     );
 
     let request_body = json!({
-        "model": "grok-3",
+        "model": "grok-3-latest",
         "messages": [
             {
                 "role": "user",
